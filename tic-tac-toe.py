@@ -7,11 +7,11 @@ board = [['_', '_', '_'],
 def main():
     print("Main method.")
     displayBoard()
-    while(not inWinningState()):
+    while(not inWinningState() and not isBoardFull()):
         getXMove()
         displayBoard()
 
-        if (not inWinningState()):
+        if (not inWinningState() and not isBoardFull()):
             getOMove()
             displayBoard()
 
@@ -58,6 +58,34 @@ def placeSymbol(row, col, symbol):
 # Check if the board is in a winning state
 def inWinningState():
     global board
+    if (board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[2][0] != '_'):
+        return True
+    elif (board[0][0] == board[1][0] and board[1][0] == board[2][0] and board[2][0] != '_'):
+        return True
+    elif (board[0][0] == board[0][1] and board[0][1] == board[0][2] and board[0][2] != '_'):
+        return True
+    elif (board[0][1] == board[1][1] and board[1][1] == board[2][1] and board[2][1] != '_'):
+        return True
+    elif (board[0][2] == board[1][2] and board[1][2] == board[2][2] and board[2][2] != '_'):
+        return True
+    elif (board[0][2] == board[1][1] and board[1][1] == board[2][0] and board[2][0] != '_'):
+        return True
+    elif (board[1][0] == board[1][1] and board[1][1] == board[1][2] and board[1][2] != '_'):
+        return True
+    elif (board[2][0] == board[2][1] and board[2][1] == board[2][2] and board[2][2] != '_'):
+        return True
+    else:
+        return False
+    
+# Return true if board doesn't have any '_'    
+def isBoardFull():
+    global board
+    for i in board:
+        if i.count('_') != 0:
+            return False
+    return True
+
+
 
 # Display the board to the console
 def displayBoard():
