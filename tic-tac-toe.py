@@ -3,6 +3,8 @@ board = [['_', '_', '_'],
          ['_', '_', '_'],
          ['_', '_', '_']]
 
+winner = '_'
+
 # Main method
 def main():
     print("Main method.")
@@ -14,6 +16,13 @@ def main():
         if (not inWinningState() and not isBoardFull()):
             getOMove()
             displayBoard()
+
+    if winner == '_':
+        print("\n\n" + "Game ends in a draw. No winner :c")
+        displayBoard()
+    else:
+        print("\n\n" + winner + " is the winner!")
+        displayBoard()
 
 
 # Get the move of the X player
@@ -57,22 +66,30 @@ def placeSymbol(row, col, symbol):
 
 # Check if the board is in a winning state
 def inWinningState():
-    global board
+    global board, winner
     if (board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[2][0] != '_'):
+        winner = board[0][0]
         return True
     elif (board[0][0] == board[1][0] and board[1][0] == board[2][0] and board[2][0] != '_'):
+        winner = board[0][0]
         return True
     elif (board[0][0] == board[0][1] and board[0][1] == board[0][2] and board[0][2] != '_'):
+        winner = board[0][0]
         return True
     elif (board[0][1] == board[1][1] and board[1][1] == board[2][1] and board[2][1] != '_'):
+        winner = board[0][1]
         return True
     elif (board[0][2] == board[1][2] and board[1][2] == board[2][2] and board[2][2] != '_'):
+        winner = board[0][2]
         return True
     elif (board[0][2] == board[1][1] and board[1][1] == board[2][0] and board[2][0] != '_'):
+        winner = board[0][2]
         return True
     elif (board[1][0] == board[1][1] and board[1][1] == board[1][2] and board[1][2] != '_'):
+        winner = board[1][0]
         return True
     elif (board[2][0] == board[2][1] and board[2][1] == board[2][2] and board[2][2] != '_'):
+        winner = board[2][0]
         return True
     else:
         return False
